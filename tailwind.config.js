@@ -4,7 +4,22 @@ module.exports = {
     "./src/**/*.{html,ts}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        'primary-color': '#D05270',
+        'secondary-color': '#424242',
+        'territory-color': '#3A0CA3',
+        'twitter-color-btn': '#47acdf',
+        'linkedin-color-btn': '#1275b1',
+      },
+      fontFamily: {
+        'monsterrat': ['Montserrat', ' sans-serif']
+      },
+      transitionDuration: {
+        '0': '0ms',
+        '5000': '5000ms',
+      }
+    },
   },
   plugins: [],
 }
