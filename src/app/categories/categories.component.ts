@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Category } from '../modals/category';
 import { CategoriesService } from '../services/categories.service';
 
 @Component({
@@ -10,18 +11,9 @@ export class CategoriesComponent {
 
   constructor(private CategoryService: CategoriesService) { }
 
-  category: any = {
-    name: ''
-  }
-  subcategoryData = {
-    subCategory: 'subCategory1'
-  }
-  SubSubcategoryData = {
-    subCategory: 'subCategory1'
-  }
 
   forms(formsData: any) {
-    let categoryData = {
+    let categoryData: Category = {
       category: formsData.value.category
     }
     this.CategoryService.saveData(categoryData)
