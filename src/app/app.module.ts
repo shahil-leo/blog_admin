@@ -10,8 +10,10 @@ import { FooterComponent } from './layouts/footer/footer.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { environment } from 'src/environments/environment.development';
 import { CategoriesComponent } from './categories/categories.component';
+import { ToastrModule } from 'ngx-toastr';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,7 +30,9 @@ import { FormsModule } from '@angular/forms';
     // this will contain all the modules in the firestore we want to use on by one for any operations related to firebase so we are importing the entire module inside the app so no need to import every single time we can initilize our firestore features on by one using the module imported in the app module
     AngularFirestoreModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    ToastrModule.forRoot(),
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
