@@ -11,16 +11,18 @@ export class CategoriesComponent implements OnInit {
 
   constructor(private CategoryService: CategoriesService) { }
 
+  categoryArray!: any;
 
   forms(formsData: any) {
     let categoryData: Category = {
-      category: formsData.value.category
+      category: formsData.value.category,
     }
     this.CategoryService.saveData(categoryData)
   }
   ngOnInit(): void {
     this.CategoryService.loadData().subscribe(value => {
-      console.log(value)
+      this.categoryArray = value
+      console.log(this.categoryArray)
     })
   }
 
