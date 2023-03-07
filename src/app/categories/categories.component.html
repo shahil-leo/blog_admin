@@ -1,0 +1,13 @@
+<div class="flex justify-center mx-32">
+  <form (ngSubmit)="forms(categoryForm)" #categoryForm="ngForm">
+    <div class="flex flex-col md:flex-row justify-between gap-12 md:gap-20">
+      <input
+        type="text"
+        name="category"
+        class="border border-black p-2 md:p-6 md:w-[25rem] lg:w-[40rem]"
+        [(ngModel)]="category.name"
+      />
+      <button class="bg-yellow-200 px-5 py-1">Add New Category</button>
+    </div>
+  </form>
+</div>
