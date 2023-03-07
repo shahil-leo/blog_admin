@@ -1,13 +1,45 @@
-<div class="flex justify-center mx-32">
-  <form (ngSubmit)="forms(categoryForm)" #categoryForm="ngForm">
-    <div class="flex flex-col md:flex-row justify-between gap-12 md:gap-20">
-      <input
-        type="text"
-        name="category"
-        class="border border-black p-2 md:p-6 md:w-[25rem] lg:w-[40rem]"
-        [(ngModel)]="category.name"
-      />
-      <button class="bg-yellow-200 px-5 py-1">Add New Category</button>
+<section class="px-4 py-3 md:px-20">
+  <div>
+    <div class="bg-secondary text-primary px-4 py-3 shadow">
+      <h1 class="font-bold text-2xl md:text-5xl text-center">New Categories</h1>
+      <p class="text-center">You can add new categories here</p>
+      <form
+        class="mt-4 md:mt-6"
+        #categoryForm="ngForm"
+        (ngSubmit)="forms(categoryForm)"
+      >
+        <input
+          class="outline-none px-6 py-1 mb-2 mx-2 w-[60%] md:w-[88%] border-2 md:py-2 rounded shadow"
+          type="text"
+          placeholder="Add new categories..."
+          name="category"
+          ngModel
+          #addCategory="ngModel"
+          required
+        />
+        <button
+          *ngIf="categoryForm.invalid; else error"
+          [disabled]="categoryForm.invalid"
+          class="bg-black/40 text-secondary text-xs md:text-base px-2 py-2 mt-2 md:py-2 rounded shadow-md"
+        >
+          Add Category
+        </button>
+        <ng-template #error>
+          <button
+            class="bg-primary-color text-secondary text-xs md:text-base px-2 py-2 mt-2 md:py-2 rounded shadow-md text-white"
+          >
+            Add Category
+          </button>
+        </ng-template>
+      </form>
+      <span
+        class="text-red-600 pt-8 px-4"
+        *ngIf="addCategory.invalid && addCategory.touched"
+        [ngClass]="{
+          'border-red-600': addCategory.invalid && addCategory.touched
+        }"
+        >Please check your input
+      </span>
     </div>
-  </form>
-</div>
+  </div>
+</section>
