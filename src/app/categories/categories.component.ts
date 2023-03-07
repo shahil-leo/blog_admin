@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Category } from '../modals/category';
 import { CategoriesService } from '../services/categories.service';
 
@@ -7,7 +7,7 @@ import { CategoriesService } from '../services/categories.service';
   templateUrl: './categories.component.html',
   styleUrls: ['./categories.component.scss']
 })
-export class CategoriesComponent {
+export class CategoriesComponent implements OnInit {
 
   constructor(private CategoryService: CategoriesService) { }
 
@@ -17,7 +17,12 @@ export class CategoriesComponent {
       category: formsData.value.category
     }
     this.CategoryService.saveData(categoryData)
-
   }
+  ngOnInit(): void {
+    this.CategoryService.loadData().subscribe(value => {
+      console.log(value)
+    })
+  }
+
 
 }
