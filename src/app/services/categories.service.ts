@@ -73,5 +73,14 @@ export class CategoriesService {
     })
   }
 
+  deleteData(id: string) {
+    // cleaner line of code
+    // this.afs.docs(`categories/${id}`).delete().then
+    // this is the cleaner coding
+    this.afs.collection('categories').doc(id).delete().then(doc => {
+      this.toaster.success("element removed")
+    })
+  }
+
 }
 

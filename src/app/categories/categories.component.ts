@@ -19,26 +19,30 @@ export class CategoriesComponent implements OnInit {
     let categoryData: Category = {
       category: formsData.value.category,
     }
-    console.log(this.formStatus)
-    if (this.formStatus === 'Add') {
-      console.log(this.formStatus)
+    if (this.formStatus === 'New') {
       this.CategoryService.saveData(categoryData)
-      formsData.reset()
+
     } else if (this.formStatus === 'Edit') {
-      console.log('shahil')
+
       this.CategoryService.updateData(this.categoryId, categoryData)
+      this.formStatus = 'New'
     }
+
+    formsData.reset()
   }
   ngOnInit(): void {
     this.CategoryService.loadData().subscribe(value => {
       this.categoryArray = value
-      console.log(this.categoryArray)
     })
   }
   onEdit(category: string, id: string) {
     this.formStatus = "Edit"
     this.formCategory = category
     this.categoryId = id
+  }
+
+  onDelete(id: string) {
+    this.CategoryService.deleteData(id)
   }
 
 
