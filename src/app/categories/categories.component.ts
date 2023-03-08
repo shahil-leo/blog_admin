@@ -9,6 +9,7 @@ import { CategoriesService } from '../services/categories.service';
 })
 export class CategoriesComponent implements OnInit {
   formCategory: any;
+  // we are creating a form status for the form and we can do the logic depending on the variable if we click on the edit button then we will be the edit otherwise we will be in the add
   formStatus: string = 'New'
   categoryId!: string
   constructor(private CategoryService: CategoriesService) { }
@@ -16,9 +17,11 @@ export class CategoriesComponent implements OnInit {
   categoryArray!: any;
 
   forms(formsData: any) {
+    // we are getting the value inside the formsData we have somany methods also
     let categoryData: Category = {
       category: formsData.value.category,
     }
+
     if (this.formStatus === 'New') {
       this.CategoryService.saveData(categoryData)
 
