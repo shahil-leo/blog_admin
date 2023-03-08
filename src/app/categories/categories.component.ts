@@ -8,7 +8,9 @@ import { CategoriesService } from '../services/categories.service';
   styleUrls: ['./categories.component.scss']
 })
 export class CategoriesComponent implements OnInit {
-
+  formCategory: any;
+  formStatus: string = 'New'
+  categoryId!: string
   constructor(private CategoryService: CategoriesService) { }
 
   categoryArray!: any;
@@ -17,13 +19,26 @@ export class CategoriesComponent implements OnInit {
     let categoryData: Category = {
       category: formsData.value.category,
     }
-    this.CategoryService.saveData(categoryData)
+    console.log(this.formStatus)
+    if (this.formStatus === 'Add') {
+      console.log(this.formStatus)
+      this.CategoryService.saveData(categoryData)
+      formsData.reset()
+    } else if (this.formStatus === 'Edit') {
+      console.log('shahil')
+      this.CategoryService.updateData(this.categoryId, categoryData)
+    }
   }
   ngOnInit(): void {
     this.CategoryService.loadData().subscribe(value => {
       this.categoryArray = value
       console.log(this.categoryArray)
     })
+  }
+  onEdit(category: string, id: string) {
+    this.formStatus = "Edit"
+    this.formCategory = category
+    this.categoryId = id
   }
 
 

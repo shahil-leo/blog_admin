@@ -1,8 +1,10 @@
 <section class="px-4 py-3 md:px-20">
   <div>
     <div class="px-4 py-3 shadow bg-secondary text-primary">
-      <h1 class="text-2xl font-bold text-center md:text-5xl">New Categories</h1>
-      <p class="text-center">You can add new categories here</p>
+      <h1 class="text-2xl font-bold text-center md:text-5xl">
+        {{ formStatus }}Categories
+      </h1>
+      <p class="text-center">You can {{ formStatus }} categories here</p>
       <form
         class="mt-4 md:mt-6"
         #categoryForm="ngForm"
@@ -13,7 +15,7 @@
           type="text"
           placeholder="Add new categories..."
           name="category"
-          ngModel
+          [(ngModel)]="formCategory"
           #addCategory="ngModel"
           required
         />
@@ -22,13 +24,13 @@
           [disabled]="categoryForm.invalid"
           class="px-2 py-2 mt-2 text-xs rounded shadow-md bg-black/40 text-secondary md:text-base md:py-2"
         >
-          Add Category
+          {{ formStatus }} Category
         </button>
         <ng-template #error>
           <button
             class="px-2 py-2 mt-2 text-xs text-white rounded shadow-md bg-primary-color text-secondary md:text-base md:py-2"
           >
-            Add Category
+            {{ formStatus }} Category
           </button>
         </ng-template>
       </form>
@@ -57,6 +59,7 @@
         <p>{{ item.data.category }}</p>
         <div>
           <button
+            (click)="onEdit(item.data.category, item.id)"
             class="px-4 py-2 mx-2 font-bold bg-yellow-500 rounded text-nav"
           >
             <i class="fa-solid fa-pen-to-square"></i>&nbsp; Edit
