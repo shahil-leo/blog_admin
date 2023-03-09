@@ -12,9 +12,10 @@ export class CategoriesComponent implements OnInit {
   // we are creating a form status for the form and we can do the logic depending on the variable if we click on the edit button then we will be the edit otherwise we will be in the add
   formStatus: string = 'New'
   categoryId!: string
+  categoryArray!: any;
+
   constructor(private CategoryService: CategoriesService) { }
 
-  categoryArray!: any;
 
   forms(formsData: any) {
     // we are getting the value inside the formsData we have somany methods also
