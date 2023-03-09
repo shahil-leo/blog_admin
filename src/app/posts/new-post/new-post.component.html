@@ -1,1 +1,60 @@
-<h1>shahil kv.com</h1>
+<section class="flex justify-center">
+  <form action="" class="flex flex-col gap-3">
+    <div class="flex flex-col gap-10 md:flex-row">
+      <div class="w-[32rem] h-28">
+        <mat-form-field action="" class="w-[32rem] h-28" appearance="fill">
+          <mat-label>Title</mat-label>
+          <input matInput placeholder="Web Development" />
+        </mat-form-field>
+        <mat-form-field action="" class="w-[32rem] h-28" appearance="fill">
+          <mat-label>PermaLink</mat-label>
+          <input matInput placeholder="Web Development" />
+        </mat-form-field>
+      </div>
+      <div class="flex flex-col">
+        <mat-form-field
+          appearance="fill"
+          class="md:min-w-[20.25rem] w-[32rem] h-28"
+        >
+          <mat-label>Please Select a post category</mat-label>
+          <mat-select>
+            <mat-option value="one">First option</mat-option>
+            <mat-option value="two">Second option</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="w-[32rem] h-28">
+          <input matInput type="text" disabled />
+          <mat-label>Select folder</mat-label>
+          <button mat-icon-button>
+            <mat-icon>folder</mat-icon>
+          </button>
+          <input type="file" webkitdirectory />
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div>
+      <mat-form-field appearance="fill" class="w-[32rem]">
+        <mat-label>Excerpt</mat-label>
+        <textarea matInput rows="8"></textarea>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="w-[65rem]">
+        <mat-label>Content</mat-label>
+        <textarea matInput rows="8"></textarea>
+      </mat-form-field>
+
+      <mat-button-toggle-group
+        class="flex flex-col justify-center mt-5 mb-20 border-none md:flex-row gap-7"
+      >
+        <mat-button-toggle class="p-1 bg-[#03636a] text-white"
+          >Add New Posts</mat-button-toggle
+        >
+        <mat-button-toggle class="p-1 bg-yellow-200"
+          >Back to Dashboard</mat-button-toggle
+        >
+      </mat-button-toggle-group>
+    </div>
+  </form>
+</section>
