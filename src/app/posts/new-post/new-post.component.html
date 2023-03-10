@@ -1,57 +1,116 @@
-<section class="flex justify-center">
-  <form action="" class="flex flex-col gap-3">
-    <div class="flex flex-col gap-10 md:flex-row">
-      <div class="w-[32rem] h-28">
-        <mat-form-field action="" class="w-[32rem] h-28" appearance="fill">
-          <mat-label>Title</mat-label>
-          <input matInput placeholder="Web Development" />
-        </mat-form-field>
-        <mat-form-field action="" class="w-[32rem] h-28" appearance="fill">
-          <mat-label>PermaLink</mat-label>
-          <input matInput placeholder="Web Development" />
-        </mat-form-field>
-      </div>
-      <div class="flex flex-col">
-        <mat-form-field
-          appearance="fill"
-          class="md:min-w-[20.25rem] w-[32rem] h-28"
-        >
-          <mat-label>Please Select a post category</mat-label>
-          <mat-select>
-            <mat-option value="one">First option</mat-option>
-            <mat-option value="two">Second option</mat-option>
-          </mat-select>
-        </mat-form-field>
-
-        <mat-form-field appearance="outline" class="w-[32rem] h-28">
-          <input matInput type="text" disabled />
-          <mat-label>Select folder</mat-label>
-          <button mat-icon-button>
-            <mat-icon>folder</mat-icon>
+<section class="container mx-auto">
+  <div>
+    <div class="px-4 py-3 shadow bg-secondary text-primary">
+      <h1 class="text-2xl text-center md:text-5xl">All new post</h1>
+      <p class="text-center">You can add your new posts here</p>
+      <form class="mt-4 md:mt-6">
+        <!-- Title  -->
+        <div class="grid">
+          <label class="px-4 py-1" for="">Title</label>
+          <input
+            (keyup)="onTitleChanged($event)"
+            class="outline-none px-6 py-1 mb-2 mx-2 w-[60%] md:w-[100%] border-2 md:py-2 rounded shadow"
+            type="text"
+          />
+          <!-------------------------------------------- New Reactive Form Validation  --------------------------------------------------->
+        </div>
+        <!-- PermaLink -->
+        <div class="grid">
+          <label class="px-4 py-1" for="">Permalink</label>
+          <input
+            [(ngModel)]="permalink"
+            name="permalink"
+            class="pointer-events-none outline-none px-6 py-1 mb-2 mx-2 w-[60%] md:w-[100%] border-2 md:py-2 rounded shadow"
+            type="text"
+          />
+        </div>
+        <!-- Excerpt -->
+        <div class="grid">
+          <label class="px-4 py-1" for="">Excerpt</label>
+          <textarea
+            class="outline-none px-6 py-1 mb-2 mx-2 w-[60%] md:w-[100%] border-2 md:py-2 rounded shadow"
+            name=""
+            id=""
+            cols="30"
+            rows="3"
+          ></textarea>
+        </div>
+        <!-- Category -->
+        <div class="grid">
+          <label class="px-4 py-1" for="">Please select a category</label>
+          <select
+            class="outline-none px-6 py-1 mb-2 mx-2 w-[60%] md:w-[100%] border-2 md:py-2 rounded shadow"
+          >
+            <option
+              disabled
+              class="outline-none px-6 py-1 mb-2 mx-2 w-[60%] md:w-[100%] border-2 md:py-2 rounded shadow"
+            >
+              Choose a category
+            </option>
+            <option
+              *ngFor="let item of categories"
+              class="outline-none px-6 py-1 mb-2 mx-2 w-[60%] md:w-[100%] border-2 md:py-2 rounded shadow"
+              value="{{ item.id }}-{{ item.data.category }}"
+            >
+              {{ item.data.category }}
+            </option>
+          </select>
+        </div>
+        <!-- Image Posting -->
+        <div class="grid">
+          <label class="px-4 py-1" for="">Post Image</label>
+          <img [src]="imgSrc" class="h-[320px] px-6 py-1 mb-2 mx-2 shadow" />
+          <input
+            (change)="showPreview($event)"
+            type="file"
+            accept="Image/*"
+            class="outline-none px-6 py-1 mb-2 mx-2 w-[60%] md:w-[100%] border-2 md:py-2 rounded shadow"
+          />
+        </div>
+        <!-- Content Area -->
+        <div class="grid">
+          <label class="px-4 py-1">Content</label>
+          <angular-editor placeholder="Enter your details"></angular-editor>
+        </div>
+        <!-- Buttons  -->
+        <div class="flex items-center justify-center gap-5 my-4">
+          <button class="px-10 py-2 bg-[#02646793] text-secondary rounded">
+            Save Post
           </button>
-          <input type="file" webkitdirectory />
-        </mat-form-field>
-      </div>
+          <ng-template #success>
+            <button
+              class="px-10 py-2 mt-2 text-xs rounded shadow-md bg-primary text-secondary md:text-base md:py-2"
+            >
+              Add Category
+            </button>
+          </ng-template>
+          <button class="px-10 py-2 bg-yellow-600 rounded text-secondary">
+            Back to Post
+          </button>
+        </div>
+      </form>
     </div>
-    <div class="flex flex-col justify-center">
-      <mat-form-field appearance="fill" class="w-[32rem] h-[12.5rem]">
-        <mat-label>Excerpt</mat-label>
-        <textarea matInput rows="8"></textarea>
-      </mat-form-field>
-      <mat-form-field appearance="fill" class="w-[65rem]">
-        <mat-label>Content</mat-label>
-        <textarea matInput rows="8"></textarea>
-      </mat-form-field>
-      <mat-button-toggle-group
-        class="flex flex-col justify-center mt-5 mb-20 border-none md:flex-row gap-7"
-      >
-        <mat-button-toggle class="p-1 bg-[#03636a] text-white"
-          >Add New Posts</mat-button-toggle
-        >
-        <mat-button-toggle class="p-1 bg-yellow-200"
-          >Back to Dashboard</mat-button-toggle
-        >
-      </mat-button-toggle-group>
-    </div>
-  </form>
+  </div>
 </section>
+
+<!-- <input
+  class="outline-none px-6 py-1 mb-2 mx-2 w-[60%] md:w-[88%] border-2 md:py-2 rounded shadow"
+  type="text"
+  placeholder="Add new categories..."
+  name="category"
+  required
+/>
+<button
+  *ngIf="categoryForm.invalid; else error"
+  [disabled]="categoryForm.invalid"
+  class="bg-[#02646793] text-secondary text-xs md:text-base px-2 py-2 mt-2 md:py-2 rounded shadow-md"
+>
+  Add Category
+</button>
+<ng-template #error>
+  <button
+    class="px-2 py-2 mt-2 text-xs rounded shadow-md bg-primary text-secondary md:text-base md:py-2"
+  >
+    {{ formStatus }} Category
+  </button>
+</ng-template> -->
