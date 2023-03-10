@@ -1,18 +1,14 @@
 <div class="flex justify-center p-10">
   <div
-    class="flex flex-col items-center gap-7 md:min-w-[55.25rem] max-w-[45.rem] py-5 px-5 md:px-28 text-center bg-slate-200"
+    class="flex flex-col items-center gap-6 md:min-w-[55.25rem] max-w-[45.rem] py-5 px-5 md:px-28 text-center bg-slate-200"
   >
     <h1 class="text-3xl font-medium">All Blog Posts</h1>
     <p>From here you can manage you blog posts</p>
-    <mat-button-toggle-group class="flex flex-col md:flex-row gap-7">
-      <mat-button-toggle
-        routerLink="/posts/new"
-        class="p-1 bg-[#03636a] text-white"
-        >Add New Posts</mat-button-toggle
-      >
-      <mat-button-toggle routerLink="/" class="p-1 bg-yellow-200"
-        >Back to Dashboard</mat-button-toggle
-      >
-    </mat-button-toggle-group>
+    <div class="flex flex-col md:flex-row gap-7">
+      <button routerLink="/posts/new" class="p-4 bg-[#03636a] text-white">
+        Add New Posts
+      </button>
+      <button routerLink="/" class="p-4 bg-yellow-200">Add New Posts</button>
+    </div>
   </div>
 </div>

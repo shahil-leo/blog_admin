@@ -8,17 +8,17 @@
         <div class="grid">
           <label class="px-4 py-1" for="">Title</label>
           <input
-            (keyup)="onTitleChanged($event)"
+            #inputValue
             class="outline-none px-6 py-1 mb-2 mx-2 w-[60%] md:w-[100%] border-2 md:py-2 rounded shadow"
             type="text"
           />
+
           <!-------------------------------------------- New Reactive Form Validation  --------------------------------------------------->
         </div>
-        <!-- PermaLink -->
         <div class="grid">
           <label class="px-4 py-1" for="">Permalink</label>
           <input
-            [(ngModel)]="permalink"
+            value="{{ permalink }}"
             name="permalink"
             class="pointer-events-none outline-none px-6 py-1 mb-2 mx-2 w-[60%] md:w-[100%] border-2 md:py-2 rounded shadow"
             type="text"
@@ -61,6 +61,7 @@
           <label class="px-4 py-1" for="">Post Image</label>
           <img [src]="imgSrc" class="h-[320px] px-6 py-1 mb-2 mx-2 shadow" />
           <input
+            formControlName="postImg"
             (change)="showPreview($event)"
             type="file"
             accept="Image/*"
@@ -92,25 +93,3 @@
     </div>
   </div>
 </section>
-
-<!-- <input
-  class="outline-none px-6 py-1 mb-2 mx-2 w-[60%] md:w-[88%] border-2 md:py-2 rounded shadow"
-  type="text"
-  placeholder="Add new categories..."
-  name="category"
-  required
-/>
-<button
-  *ngIf="categoryForm.invalid; else error"
-  [disabled]="categoryForm.invalid"
-  class="bg-[#02646793] text-secondary text-xs md:text-base px-2 py-2 mt-2 md:py-2 rounded shadow-md"
->
-  Add Category
-</button>
-<ng-template #error>
-  <button
-    class="px-2 py-2 mt-2 text-xs rounded shadow-md bg-primary text-secondary md:text-base md:py-2"
-  >
-    {{ formStatus }} Category
-  </button>
-</ng-template> -->
