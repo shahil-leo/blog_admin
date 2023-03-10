@@ -13,19 +13,11 @@ export class NewPostComponent implements OnInit {
   imgSrc: string | ArrayBuffer | null | undefined = '../../../assets/template.png'
   categories!: Array<any>
 
-  title: string = '';
-  excerpt: string = ''
 
   // Reactive forms
 
-  constructor(private categoryService: CategoriesService, private fb: FormBuilder) {
+  constructor(private categoryService: CategoriesService, private fb: FormBuilder) { }
 
-    // this is a method for usiing 2 way data binding in the reactive forms value change will emit data when the
-    fb.control({
-      title: ['', [Validators.]]
-    })
-
-  }
 
 
   ngOnInit(): void {
