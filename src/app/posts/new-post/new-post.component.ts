@@ -21,6 +21,9 @@ export class NewPostComponent implements OnInit {
   constructor(private categoryService: CategoriesService, private fb: FormBuilder) {
 
     // this is a method for usiing 2 way data binding in the reactive forms value change will emit data when the
+    fb.control({
+      title: ['', [Validators.]]
+    })
 
   }
 
@@ -39,10 +42,6 @@ export class NewPostComponent implements OnInit {
     }
     reader.readAsDataURL($event.target.files[0])
   }
-
-
-
-
 
 
 }
