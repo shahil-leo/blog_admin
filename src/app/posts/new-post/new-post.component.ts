@@ -12,11 +12,32 @@ export class NewPostComponent implements OnInit {
   permalink: string = ''
   imgSrc: string | ArrayBuffer | null | undefined = '../../../assets/template.png'
   categories!: Array<any>
-
-
+  newForm: FormGroup
+  titleValue: string = ''
   // Reactive forms
 
-  constructor(private categoryService: CategoriesService, private fb: FormBuilder) { }
+  constructor(private categoryService: CategoriesService, private fb: FormBuilder) {
+
+    this.newForm = fb.group({
+      title: ['', [Validators.required, Validators.minLength(10)]],
+      permalink: ['', Validators.required],
+      excerpt: ['', [Validators.required, Validators.minLength(50)]],
+      category: ['', Validators.required],
+      postImg: ['', Validators.required,],
+      content: ['', Validators.required]
+    })
+    this.newForm.get('title')?.valueChanges.subscribe((value) => {
+      this.permalink = value.replace(/\s/g, '-')
+      console.log(this.permalink);
+
+    })
+  }
+
+
+
+  get fc() {
+    return this.newForm.controls
+  }
 
 
 
