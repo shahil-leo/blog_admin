@@ -20,15 +20,15 @@ export class NewPostComponent implements OnInit {
 
     this.newForm = fb.group({
       title: ['', [Validators.required, Validators.minLength(10)]],
-      permalink: ['', Validators.required],
+      permalink: [{ value: '', disabled: true }, [Validators.required]],
       excerpt: ['', [Validators.required, Validators.minLength(50)]],
       category: ['', Validators.required],
       postImg: ['', Validators.required,],
       content: ['', Validators.required]
     })
+    // ng model in the form title and for the permalink
     this.newForm.get('title')?.valueChanges.subscribe((value) => {
       this.permalink = value.replace(/\s/g, '-')
-      console.log(this.permalink);
 
     })
   }

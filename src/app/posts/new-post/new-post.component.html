@@ -14,33 +14,44 @@
             type="text"
             formControlName="title"
           />
-        </div>
-        <div *ngIf="fc.title.errors?.required">
-          <div
-            *ngIf="fc.title.touched && fc.title.invalid"
-            class="text-red-400"
-          >
-            Title is Required
+          <div class="px-5" *ngIf="fc.title.errors?.required">
+            <div
+              *ngIf="fc.title.touched && fc.title.invalid"
+              class="text-red-400"
+            >
+              Title is Required
+            </div>
+            `
+          </div>
+          <div *ngIf="fc.title.errors?.minlength">
+            <div
+              *ngIf="fc.title.touched && fc.title.invalid"
+              class="text-red-400"
+            >
+              Title is al least 10 characters long
+            </div>
           </div>
         </div>
-        <div *ngIf="fc.title.errors?.minlength">
-          <div
-            *ngIf="fc.title.touched && fc.title.invalid"
-            class="text-red-400"
-          >
-            Title is al least 10 characters long
-          </div>
-        </div>
+        <!-- permalink -->
         <div class="grid">
           <label class="px-4 py-1" for="">Permalink</label>
           <input
             value="{{ permalink }}"
             name="permalink"
-            class="pointer-events-none outline-none px-6 py-1 mb-2 mx-2 w-[60%] md:w-[100%] border-2 md:py-2 rounded shadow"
+            class="outline-none px-6 py-1 mb-2 mx-2 w-[60%] md:w-[100%] border-2 md:py-2 rounded shadow"
             type="text"
             formControlName="permalink"
           />
+          <div class="px-5" *ngIf="fc.permalink.errors?.required">
+            <div
+              *ngIf="fc.permalink.touched && fc.permalink.invalid"
+              class="text-red-400"
+            >
+              permalink is Required
+            </div>
+          </div>
         </div>
+
         <!-- Excerpt -->
         <div class="grid">
           <label class="px-4 py-1" for="">Excerpt</label>
@@ -52,11 +63,28 @@
             rows="3"
             formControlName="excerpt"
           ></textarea>
+          <div class="px-5" *ngIf="fc.excerpt.errors?.required">
+            <div
+              *ngIf="fc.excerpt.touched && fc.excerpt.invalid"
+              class="text-red-400"
+            >
+              Excerpt is Required
+            </div>
+          </div>
+          <div class="px-5" *ngIf="fc.excerpt.errors?.minlength">
+            <div
+              *ngIf="fc.excerpt.touched && fc.excerpt.invalid"
+              class="text-red-400"
+            >
+              Excerpt must be at least 50 characters long
+            </div>
+          </div>
         </div>
         <!-- Category -->
         <div class="grid">
           <label class="px-4 py-1" for="">Please select a category</label>
           <select
+            formControlName="category"
             class="outline-none px-6 py-1 mb-2 mx-2 w-[60%] md:w-[100%] border-2 md:py-2 rounded shadow"
           >
             <option
@@ -73,6 +101,14 @@
               {{ item.data.category }}
             </option>
           </select>
+          <div class="px-5" *ngIf="fc.category.errors?.required">
+            <div
+              *ngIf="fc.category.touched && fc.category.invalid"
+              class="text-red-400"
+            >
+              Please Select a Category
+            </div>
+          </div>
         </div>
         <!-- Image Posting -->
         <div class="grid">
@@ -86,6 +122,14 @@
             class="outline-none px-6 py-1 mb-2 mx-2 w-[60%] md:w-[100%] border-2 md:py-2 rounded shadow"
             formControlName="postImg"
           />
+          <div class="px-5" *ngIf="fc.postImg.errors?.required">
+            <div
+              *ngIf="fc.postImg.touched && fc.postImg.invalid"
+              class="text-red-400"
+            >
+              Post Image is Required
+            </div>
+          </div>
         </div>
         <!-- Content Area -->
         <div class="grid">
@@ -94,20 +138,34 @@
             formControlName="content"
             placeholder="Enter your details"
           ></angular-editor>
+          <div class="px-5" *ngIf="fc.content.errors?.required">
+            <div
+              *ngIf="fc.content.touched && fc.content.invalid"
+              class="text-red-400"
+            >
+              Content is Required
+            </div>
+          </div>
         </div>
         <!-- Buttons  -->
         <div class="flex items-center justify-center gap-5 my-4">
-          <button class="px-10 py-2 bg-[#02646793] text-secondary rounded">
+          <button
+            class="px-10 py-2 bg-[#02646793] text-secondary rounded"
+            routerLink="/posts"
+          >
             Save Post
           </button>
-          <ng-template #success>
+          <!-- <ng-template #success>
             <button
               class="px-10 py-2 mt-2 text-xs rounded shadow-md bg-primary text-secondary md:text-base md:py-2"
             >
               Add Category
             </button>
-          </ng-template>
-          <button class="px-10 py-2 bg-yellow-600 rounded text-secondary">
+          </ng-template> -->
+          <button
+            routerLink="/posts"
+            class="px-10 py-2 bg-yellow-600 rounded text-secondary"
+          >
             Back to Post
           </button>
         </div>
