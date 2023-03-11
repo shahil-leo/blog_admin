@@ -4,7 +4,7 @@
       <h1 class="text-2xl text-center md:text-5xl">All new post</h1>
       <p class="text-center">You can add your new posts here</p>
       <!-------------------------------------------- New Reactive Form Validation  --------------------------------------------------->
-      <form [formGroup]="newForm" class="mt-4 md:mt-6">
+      <form [formGroup]="newForm" class="mt-4 md:mt-6" (ngSubmit)="onSubmit()">
         <!-- Title  -->
         <div class="grid">
           <label class="px-4 py-1" for="">Title</label>
@@ -21,7 +21,6 @@
             >
               Title is Required
             </div>
-            `
           </div>
           <div *ngIf="fc.title.errors?.minlength">
             <div
@@ -38,7 +37,7 @@
           <input
             value="{{ permalink }}"
             name="permalink"
-            class="outline-none px-6 py-1 mb-2 mx-2 w-[60%] md:w-[100%] border-2 md:py-2 rounded shadow"
+            class="pointer-events-none outline-none px-6 py-1 mb-2 mx-2 w-[60%] md:w-[100%] border-2 md:py-2 rounded shadow"
             type="text"
             formControlName="permalink"
           />
@@ -98,7 +97,7 @@
               class="outline-none px-6 py-1 mb-2 mx-2 w-[60%] md:w-[100%] border-2 md:py-2 rounded shadow"
               value="{{ item.id }}-{{ item.data.category }}"
             >
-              {{ item.data.category }}
+              {{ item.data.category }}`
             </option>
           </select>
           <div class="px-5" *ngIf="fc.category.errors?.required">
@@ -150,11 +149,12 @@
         <!-- Buttons  -->
         <div class="flex items-center justify-center gap-5 my-4">
           <button
+            [disabled]="newForm.invalid"
             class="px-10 py-2 bg-[#02646793] text-secondary rounded"
-            routerLink="/posts"
           >
             Save Post
           </button>
+          <button (click)="onSubmit()">sfasdfhaskd</button>
           <!-- <ng-template #success>
             <button
               class="px-10 py-2 mt-2 text-xs rounded shadow-md bg-primary text-secondary md:text-base md:py-2"
