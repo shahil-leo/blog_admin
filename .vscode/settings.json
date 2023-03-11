@@ -1,5 +1,8 @@
 {
-  "cSpell.words": ["firestore"],
+  "cSpell.words": [
+    "firestore",
+    "Toastr"
+  ],
   "editor.tokenColorCustomizations": {
     "comments": "",
     "textMateRules": []

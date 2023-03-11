@@ -18,6 +18,7 @@ import { AllPostComponent } from './posts/all-post/all-post.component';
 import { NewPostComponent } from './posts/new-post/new-post.component'
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { HttpClientModule } from '@angular/common/http';
+import { AngularFireStorageModule } from '@angular/fire/compat/storage'
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,6 +42,7 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserAnimationsModule,
     AngularEditorModule,
     HttpClientModule,
+    AngularFireStorageModule
   ],
   providers: [],
   bootstrap: [AppComponent]
