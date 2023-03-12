@@ -8,7 +8,7 @@
       <button routerLink="/posts/new" class="p-4 bg-[#03636a] text-white">
         Add New Posts
       </button>
-      <button routerLink="/" class="p-4 bg-yellow-200">Add New Posts</button>
+      <button routerLink="/" class="p-4 bg-yellow-200">Back to home</button>
     </div>
   </div>
   <div class="flex gap-2 mt-10 border rounded-md border-black/30">
@@ -25,16 +25,30 @@
     *ngFor="let post of postArray; let i = index"
   >
     <div class="flex-1 p-2 max-w-[10%]">{{ i + 1 }}</div>
-    <div class="flex-[2] max-w-[20%] p-2 min-w-[10rem]">
-      <img src="{{ post.data.postImgPath }}" alt="" />
+    <div class="flex-[2] max-w-[20%] p-2 min-w-[12rem]">
+      <img class="max-h-[7.5rem]" src="{{ post.data.postImgPath }}" alt="" />
     </div>
-    <div class="flex-1 p-2 max-w-[10%]">{{ post.data.title }}</div>
-    <div class="flex-[2] p-2 max-w-[40%]">{{ post.data.excerpt }}</div>
-    <div class="flex-1 p-2 max-w-[10%]">{{ post.data.category.category }}</div>
-    <div class="flex-1 p-2 max-w-[10%]">
+    <div class="flex-1 p-2 min-w-[10%]">{{ post.data.title }}</div>
+    <div class="flex-[2] p-2 min-w-[40%]">{{ post.data.excerpt }}</div>
+    <div class="flex-1 p-2 min-w-[10%]">{{ post.data.category.category }}</div>
+    <div class="flex-1 p-2 min-w-[10%]">
       {{ post.data.createdAt.toMillis() | date }}
     </div>
-    <div class="flex-1 p-2 w-10%">shahil is a</div>
+    <div class="flex gap-6 flex-1 flex-row p-2 w-10%">
+      <button
+        class="p-2 bg-yellow-300 max-h-[6.25rem]"
+        routerLink="/posts/new"
+        [queryParams]="{ id: post.id }"
+      >
+        Edit posts
+      </button>
+      <button
+        class="p-2 bg-red-400 max-h-[6.25rem]"
+        (click)="onDelete(post.data.postImgPath, post.id)"
+      >
+        Delete posts
+      </button>
+    </div>
     <hr class="text-black" />
   </div>
 </div>
