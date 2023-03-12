@@ -1,8 +1,8 @@
 <section class="container mx-auto">
   <div>
     <div class="px-4 py-3 shadow bg-secondary text-primary">
-      <h1 class="text-2xl text-center md:text-5xl">All new post</h1>
-      <p class="text-center">You can add your new posts here</p>
+      <h1 class="text-2xl text-center md:text-5xl">{{ formStatus }} post</h1>
+      <p class="text-center">You can add your {{ formStatus }} here</p>
       <!-------------------------------------------- New Reactive Form Validation  --------------------------------------------------->
       <form [formGroup]="newForm" class="mt-4 md:mt-6" (ngSubmit)="onSubmit()">
         <!-- Title  -->
@@ -146,13 +146,14 @@
             </div>
           </div>
         </div>
+        <button class="bg-yellow-300" (click)="checking()">chekc</button>
         <!-- Buttons  -->
         <div class="flex items-center justify-center gap-5 my-4">
           <button
             [disabled]="newForm.invalid"
             class="px-10 py-2 bg-[#02646793] text-secondary rounded"
           >
-            Save Post
+            {{ formStatus }} Post
           </button>
           <!-- <ng-template #success>
             <button

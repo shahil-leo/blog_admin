@@ -4,6 +4,8 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { Post } from 'src/app/modals/post';
 import { PostsService } from 'src/app/services/posts.service';
 import { async } from '@firebase/util';
+import { ActivatedRoute } from '@angular/router';
+import { JsonPipe } from '@angular/common';
 
 @Component({
   selector: 'app-new-post',
@@ -15,25 +17,56 @@ export class NewPostComponent implements OnInit {
   permalink: string = ''
   imgSrc: any = 'https://t3.ftcdn.net/jpg/02/48/42/64/360_F_248426448_NVKLywWqArG2ADUxDq6QprtIzsF82dMF.jpg';
   categories!: Array<any>
-  newForm: FormGroup
+  newForm!: FormGroup
   titleValue: string = ''
   postData!: Post
+  singlePost!: any
+  docId!: string
+  formStatus: string = 'Add New'
 
   // Reactive forms
 
   constructor(
     private categoryService: CategoriesService,
     private fb: FormBuilder,
-    private postService: PostsService
+    private postService: PostsService,
+    private route: ActivatedRoute,
   ) {
-    this.newForm = fb.group({
-      title: ['', [Validators.required, Validators.minLength(10)]],
-      permalink: [this.permalink],
-      excerpt: ['', [Validators.required, Validators.minLength(50)]],
-      category: ['', Validators.required],
-      postImg: ['', Validators.required,],
-      content: ['', Validators.required]
+
+    this.route.queryParams.subscribe(value => {
+      this.docId = value.id
+      if (this.docId) {
+        this.postService.loadOneData(this.docId).subscribe((form) => {
+          this.singlePost = form
+          console.log(this.singlePost)
+          this.newForm = fb.group({
+            title: [this.singlePost.title, [Validators.required, Validators.minLength(10)]],
+            permalink: [this.permalink],
+            excerpt: [this.singlePost.excerpt, [Validators.required, Validators.minLength(50)]],
+            category: [`${this.singlePost.category.categoryId}-${this.singlePost.category.category}`, Validators.required],
+            postImg: ['', Validators.required,],
+            content: [this.singlePost.content, Validators.required]
+          })
+
+          this.formStatus = 'Edit'
+          this.imgSrc = this.singlePost.postImgPath
+          console.log(this.imgSrc)
+          this.permalinkChange()
+        })
+
+      }
+      this.newForm = fb.group({
+        title: ['', [Validators.required, Validators.minLength(10)]],
+        permalink: [this.permalink],
+        excerpt: ['', [Validators.required, Validators.minLength(50)]],
+        category: ['', Validators.required],
+        postImg: ['', Validators.required,],
+        content: ['', Validators.required]
+      })
+
+
     })
+
   }
   // getting all the form controls name
   get fc() {
@@ -45,9 +78,10 @@ export class NewPostComponent implements OnInit {
       this.categories = value
     })
     // ng model in the form title and for the permalink
-    this.newForm.get('title')?.valueChanges.subscribe((value) => {
-      this.permalink = value.replace(/\s/g, '-')
-    })
+    this.permalinkChange()
+
+
+    // getting query params from the query
 
   }
   // uploading image into the field for showing a demo
@@ -64,17 +98,15 @@ export class NewPostComponent implements OnInit {
   checking() {
     const invalid = [];
     const controls = this.newForm.controls;
-    console.log(controls)
     for (const name in controls) {
       if (controls[name].invalid) {
-        console.log(controls);
-
         invalid.push(name);
       }
     }
     console.log(invalid)
     return invalid;
   }
+
   // submit button when we click the submit button the values of all the input will get
   onSubmit() {
     // this.checking()
@@ -94,9 +126,16 @@ export class NewPostComponent implements OnInit {
       status: 'New',
       createdAt: new Date()
     }
+    console.log(this.postData)
+    this.postService.uploadImage(this.selectedImage, this.postData, this.formStatus, this.docId)
 
-    this.postService.uploadImage(this.selectedImage, this.postData)
+  }
+  //  change in the permalink text in the edit and the function also function
+  permalinkChange() {
+    this.newForm.get('title')?.valueChanges.subscribe((value) => {
 
+      this.permalink = value.replace(/\s/g, '-')
+    })
   }
 
 }

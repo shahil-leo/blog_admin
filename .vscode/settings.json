@@ -6,5 +6,8 @@
   "editor.tokenColorCustomizations": {
     "comments": "",
     "textMateRules": []
-  }
+  },
+  "cSpell.enableFiletypes": [
+    "!jsonc"
+  ]
 }
