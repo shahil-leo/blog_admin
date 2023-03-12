@@ -28,25 +28,39 @@
     <div class="flex-[2] max-w-[20%] p-2 min-w-[12rem]">
       <img class="max-h-[7.5rem]" src="{{ post.data.postImgPath }}" alt="" />
     </div>
-    <div class="flex-1 p-2 min-w-[10%]">{{ post.data.title }}</div>
-    <div class="flex-[2] p-2 min-w-[40%]">{{ post.data.excerpt }}</div>
-    <div class="flex-1 p-2 min-w-[10%]">{{ post.data.category.category }}</div>
-    <div class="flex-1 p-2 min-w-[10%]">
+    <div class="flex-1 p-2 max-w-[10%]">{{ post.data.title }}</div>
+    <div class="flex-[2] p-2 max-w-[40%]">{{ post.data.excerpt }}</div>
+    <div class="flex-1 p-2 max-w-[10%]">{{ post.data.category.category }}</div>
+    <div class="flex-1 p-2 max-w-[10%]">
       {{ post.data.createdAt.toMillis() | date }}
     </div>
-    <div class="flex gap-6 flex-1 flex-row p-2 w-10%">
+    <div class="flex gap-3 flex-1 flex-row p-2 max-w-10%">
       <button
-        class="p-2 bg-yellow-300 max-h-[6.25rem]"
+        class="p-2 h-24 rounded-lg bg-yellow-300 max-h-[6.25rem]"
         routerLink="/posts/new"
         [queryParams]="{ id: post.id }"
       >
         Edit posts
       </button>
       <button
-        class="p-2 bg-red-400 max-h-[6.25rem]"
+        class="h-24 p-2 bg-red-400 rounded-lg"
         (click)="onDelete(post.data.postImgPath, post.id)"
       >
         Delete posts
+      </button>
+      <button
+        *ngIf="!post.data.isFeatured"
+        class="h-24 p-2 bg-green-400 rounded-lg"
+        (click)="onFeatured(post.id, true)"
+      >
+        Mark Featured
+      </button>
+      <button
+        *ngIf="post.data.isFeatured"
+        class="h-24 p-2 bg-orange-400 rounded-lg"
+        (click)="onFeatured(post.id, false)"
+      >
+        Remove Featured
       </button>
     </div>
     <hr class="text-black" />

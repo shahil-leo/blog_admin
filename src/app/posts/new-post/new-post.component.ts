@@ -13,6 +13,7 @@ import { JsonPipe } from '@angular/common';
   styleUrls: ['./new-post.component.scss']
 })
 export class NewPostComponent implements OnInit {
+  // Global variables
   selectedImage: any
   permalink: string = ''
   imgSrc: any = 'https://t3.ftcdn.net/jpg/02/48/42/64/360_F_248426448_NVKLywWqArG2ADUxDq6QprtIzsF82dMF.jpg';
