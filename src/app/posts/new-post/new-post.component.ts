@@ -18,7 +18,7 @@ export class NewPostComponent implements OnInit {
   newForm: FormGroup
   titleValue: string = ''
   postData!: Post
-  shahil: any
+
   // Reactive forms
 
   constructor(
@@ -47,7 +47,6 @@ export class NewPostComponent implements OnInit {
     // ng model in the form title and for the permalink
     this.newForm.get('title')?.valueChanges.subscribe((value) => {
       this.permalink = value.replace(/\s/g, '-')
-
     })
 
   }
@@ -67,9 +66,6 @@ export class NewPostComponent implements OnInit {
     const controls = this.newForm.controls;
     console.log(controls)
     for (const name in controls) {
-      console.log(name)
-      console.log(controls[name]);
-
       if (controls[name].invalid) {
         console.log(controls);
 
@@ -83,7 +79,6 @@ export class NewPostComponent implements OnInit {
   onSubmit() {
     // this.checking()
     const DataSorted = this.newForm.value.category.split('-')
-
     this.postData = {
       title: this.newForm.value.title,
       permalink: this.permalink,
@@ -101,6 +96,7 @@ export class NewPostComponent implements OnInit {
     }
 
     this.postService.uploadImage(this.selectedImage, this.postData)
+
   }
 
 }
