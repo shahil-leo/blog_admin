@@ -1,0 +1,52 @@
+<div class="flex justify-center">
+  <div
+    class="flex flex-col justify-center gap-10 text-center bg-green-200 max-w-[30.75rem] p-20 rounded-md"
+  >
+    <div class="flex flex-col gap-10">
+      <h1 class="text-3xl">Login</h1>
+      <p class="text-base font-light">
+        Please login to your admin account to post a new blog post
+      </p>
+    </div>
+    <form
+      class="flex flex-col gap-5"
+      #loginForm="ngForm"
+      (ngSubmit)="onSubmit(loginForm.value)"
+    >
+      <input
+        placeholder="Email"
+        type="email"
+        class="px-6 py-3 border border-black rounded"
+        ngModel
+        name="email"
+        required
+        #Email="ngModel"
+      />
+      <!-- email validation -->
+      <div class="text-red-400" *ngIf="Email.touched && Email.invalid">
+        <div *ngIf="Email.errors?.required">Email cannot be Empty</div>
+        <div *ngIf="Email.errors?.email">
+          Please Enter a Valid Email Address
+        </div>
+      </div>
+      <input
+        placeholder="Password"
+        type="password"
+        class="px-6 py-3 border border-black rounded"
+        ngModel
+        name="password"
+        #Password="ngModel"
+        required
+      />
+      <div class="text-red-400" *ngIf="Password.touched && Password.invalid">
+        Password cannot be empty
+      </div>
+      <button
+        [disabled]="loginForm.invalid"
+        class="p-4 bg-white rounded-md shadow-md"
+      >
+        Login
+      </button>
+    </form>
+  </div>
+</div>
