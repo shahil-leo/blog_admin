@@ -26,20 +26,20 @@ export class NewPostComponent implements OnInit {
   formStatus: string = 'Add New'
 
   // Reactive forms
-
   constructor(
     private categoryService: CategoriesService,
     private fb: FormBuilder,
     private postService: PostsService,
     private route: ActivatedRoute,
   ) {
-
+    // getting the router parameter for the edit option in the all component we need to get the id in the others section
     this.route.queryParams.subscribe(value => {
       this.docId = value.id
       if (this.docId) {
+        // we are loading one data using the getting id from the route parameter we will get all the contents about the single post
+        // This part is for the edited posts not for the new
         this.postService.loadOneData(this.docId).subscribe((form) => {
           this.singlePost = form
-          console.log(this.singlePost)
           this.newForm = fb.group({
             title: [this.singlePost.title, [Validators.required, Validators.minLength(10)]],
             permalink: [this.permalink],
@@ -48,7 +48,6 @@ export class NewPostComponent implements OnInit {
             postImg: ['', Validators.required,],
             content: [this.singlePost.content, Validators.required]
           })
-
           this.formStatus = 'Edit'
           this.imgSrc = this.singlePost.postImgPath
           console.log(this.imgSrc)
@@ -56,6 +55,7 @@ export class NewPostComponent implements OnInit {
         })
 
       }
+      // This form is for the new forms
       this.newForm = fb.group({
         title: ['', [Validators.required, Validators.minLength(10)]],
         permalink: [this.permalink],
@@ -64,10 +64,7 @@ export class NewPostComponent implements OnInit {
         postImg: ['', Validators.required,],
         content: ['', Validators.required]
       })
-
-
     })
-
   }
   // getting all the form controls name
   get fc() {
@@ -77,23 +74,25 @@ export class NewPostComponent implements OnInit {
   ngOnInit(): void {
     this.categoryService.loadData().subscribe(value => {
       this.categories = value
+      console.log(this.categories);
+      // first we will get all the data from the firebase store for the categories
     })
     // ng model in the form title and for the permalink
     this.permalinkChange()
-
-
     // getting query params from the query
-
   }
-  // uploading image into the field for showing a demo
+  //  image
+  // when any type of change happens this event will trigger then we will retrieve the data
   showPreview($event: any) {
     const reader = new FileReader()
     reader.onload = (e) => {
       this.imgSrc = e.target?.result
+      // here we are only getting the details and the files of the image and the
     }
     reader.readAsDataURL($event.target.files[0])
+    // this selected image is for converting the file into a data url for the firebase
     this.selectedImage = $event.target.files[0]
-
+    console.log(this.selectedImage)
   }
   // this helped me to debug the code in the form i was not able to find which form is not validating using this method i get
   checking() {
@@ -128,6 +127,7 @@ export class NewPostComponent implements OnInit {
       createdAt: new Date()
     }
     console.log(this.postData)
+    console.log(this.selectedImage)
     this.postService.uploadImage(this.selectedImage, this.postData, this.formStatus, this.docId)
 
   }

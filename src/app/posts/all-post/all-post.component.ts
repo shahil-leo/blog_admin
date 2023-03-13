@@ -16,10 +16,7 @@ export class AllPostComponent implements OnInit {
     this.postService.loadData().subscribe(value => {
       this.postArray = value
     })
-
-
   }
-
   onDelete(imgPath: string, id: string) {
     this.postService.deleteImage(imgPath, id)
   }
