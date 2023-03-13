@@ -19,10 +19,8 @@ export class HeaderComponent implements OnInit {
     this.localStorage = localStorage.getItem('user')
     // converting string into json format
     this.loggedUser = JSON.parse(this.localStorage).email
-    this.authSer.isLoggedIn().subscribe((value) => {
-      console.log(value)
-    })
-    console.log(this.isLoggedIn$)
+    this.authSer.isLoggedIn()
+
   }
 
   isOpen: boolean = false
