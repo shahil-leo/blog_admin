@@ -23,11 +23,9 @@ export class AuthService {
       this.toastr.warning("You are not a Admin")
     })
   }
-
-
   loadUser() {
-    this.afAuth.authState.subscribe((user) => {
-      console.log(JSON.parse(JSON.stringify(user)))
+    this.afAuth.authState.subscribe((user: any) => {
+      localStorage.setItem('user', JSON.stringify(user))
     })
   }
 
