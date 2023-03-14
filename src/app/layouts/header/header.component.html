@@ -33,14 +33,12 @@
         <a href="">About Me</a>
       </li>
     </div>
-    <div class="flex items-center gap-10">
-      <!-- <h1 *ngIf="null" else user>Email</h1>
-      <ng-template #user>
-        <h1>{{ loggedUser }}</h1>
-      </ng-template>
+
+    <div class="flex items-center gap-10" *ngIf="isLoggedIn">
+      <h1>{{ loggedUser }}</h1>
       <button (click)="logOut()" class="p-4 bg-green-400 rounded-md">
         LogOut
-      </button> -->
+      </button>
     </div>
     <button class="block lg:hidden" (click)="isTrue()">
       <span class="text-4xl material-symbols-outlined"> menu </span>

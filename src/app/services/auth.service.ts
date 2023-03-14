@@ -44,7 +44,7 @@ export class AuthService {
 
   // we need to access the true and false value because if the user logged out we don't want to show the logout
   isLoggedIn() {
-    return this.loggedIn.asObservable();
+    return this.loggedIn.asObservable()
   }
 
 }

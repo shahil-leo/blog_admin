@@ -11,15 +11,28 @@ export class HeaderComponent implements OnInit {
   constructor(private authSer: AuthService) { }
   loggedUser!: string
   localStorage!: any
-  isLoggedIn$!: Observable<boolean>
+  isLoggedIn!: boolean
 
   ngOnInit(): void {
     // we are getting all the details from the local storage from the login user
     //  And it will be in a string format so we want to convert into object so we can manipulate and get the login user details using that
     this.localStorage = localStorage.getItem('user')
     // converting string into json format
-    this.loggedUser = JSON.parse(this.localStorage).email
-    this.authSer.isLoggedIn()
+    if (this.localStorage) {
+      console.log(this.localStorage)
+
+      console.log('leo')
+      this.loggedUser = JSON.parse(this.localStorage).email
+
+    } else {
+      console.log('no user')
+    }
+
+    this.authSer.isLoggedIn().subscribe(value => {
+      this.isLoggedIn = value
+      console.log(this.isLoggedIn)
+    })
+
 
   }
 
