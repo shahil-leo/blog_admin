@@ -21,7 +21,7 @@ export class HeaderComponent implements OnInit {
     if (this.localStorage) {
       console.log(this.localStorage)
 
-      console.log('leo')
+      console.log('there is user')
       this.loggedUser = JSON.parse(this.localStorage).email
 
     } else {
@@ -32,8 +32,6 @@ export class HeaderComponent implements OnInit {
       this.isLoggedIn = value
       console.log(this.isLoggedIn)
     })
-
-
   }
 
   isOpen: boolean = false
