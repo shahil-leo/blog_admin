@@ -1,11 +1,9 @@
 import { CategoriesService } from './../../services/categories.service';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Post } from 'src/app/modals/post';
 import { PostsService } from 'src/app/services/posts.service';
-import { async } from '@firebase/util';
 import { ActivatedRoute } from '@angular/router';
-import { JsonPipe } from '@angular/common';
 
 @Component({
   selector: 'app-new-post',
@@ -35,6 +33,7 @@ export class NewPostComponent implements OnInit {
     // getting the router parameter for the edit option in the all component we need to get the id in the others section
     this.route.queryParams.subscribe(value => {
       this.docId = value.id
+      console.log(this.docId)
       if (this.docId) {
         // we are loading one data using the getting id from the route parameter we will get all the contents about the single post
         // This part is for the edited posts not for the new

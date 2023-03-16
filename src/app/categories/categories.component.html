@@ -1,4 +1,5 @@
 <section class="px-4 py-3 md:px-20">
+  <!-- headsection -->
   <div>
     <div class="px-4 py-3 shadow bg-secondary text-primary">
       <h1 class="text-2xl font-bold text-center md:text-5xl">
@@ -37,13 +38,11 @@
       <span
         class="px-4 pt-8 text-red-600"
         *ngIf="addCategory.invalid && addCategory.touched"
-        [ngClass]="{
-          'border-red-600': addCategory.invalid && addCategory.touched
-        }"
         >Please check your input
       </span>
     </div>
   </div>
+  <!-- Table rows -->
   <div>
     <div class="mt-10 shadow-lg">
       <div class="flex items-center justify-between px-20 py-5 mb-4 shadow-lg">
@@ -52,20 +51,20 @@
         <h1>Action</h1>
       </div>
       <div
-        *ngFor="let item of categoryArray; index as i"
+        *ngFor="let category of categoryArray; index as i"
         class="flex items-center justify-between px-20 py-3 shadow"
       >
         <p>{{ i + 1 }}</p>
-        <p>{{ item.data.category }}</p>
+        <p>{{ category.data.category }}</p>
         <div>
           <button
-            (click)="onEdit(item.data.category, item.id)"
+            (click)="onEdit(category.data.category, category.id)"
             class="px-4 py-2 mx-2 font-bold bg-yellow-500 rounded text-nav"
           >
             <i class="fa-solid fa-pen-to-square"></i>&nbsp; Edit
           </button>
           <button
-            (click)="onDelete(item.id)"
+            (click)="onDelete(category.id)"
             class="px-4 py-2 mx-2 font-bold bg-red-500 rounded text-nav"
           >
             <i class="fa-solid fa-trash"></i>&nbsp; Delete

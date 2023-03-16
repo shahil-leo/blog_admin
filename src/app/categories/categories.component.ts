@@ -34,9 +34,11 @@ export class CategoriesComponent implements OnInit {
 
     formsData.reset()
   }
+
   ngOnInit(): void {
     this.CategoryService.loadData().subscribe(value => {
       this.categoryArray = value
+      console.log(this.categoryArray)
     })
   }
   onEdit(category: string, id: string) {
