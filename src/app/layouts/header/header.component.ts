@@ -1,3 +1,4 @@
+
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
@@ -19,18 +20,15 @@ export class HeaderComponent implements OnInit {
     this.localStorage = localStorage.getItem('user')
     // converting string into json format
     if (this.localStorage) {
-      console.log(this.localStorage)
 
-      console.log('there is user')
       this.loggedUser = JSON.parse(this.localStorage).email
 
     } else {
-      console.log('no user')
     }
 
     this.authSer.isLoggedIn().subscribe(value => {
+      console.log(value)
       this.isLoggedIn = value
-      console.log(this.isLoggedIn)
     })
   }
 
@@ -38,7 +36,6 @@ export class HeaderComponent implements OnInit {
 
   isTrue() {
     this.isOpen = !this.isOpen
-    console.log(this.isOpen)
   }
 
   logOut() {

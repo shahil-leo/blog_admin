@@ -20,7 +20,7 @@ export class NewPostComponent implements OnInit {
   titleValue: string = ''
   postData!: Post
   singlePost!: any
-  docId!: string
+  editParamId!: string
   formStatus: string = 'Add New'
 
   // Reactive forms
@@ -32,12 +32,11 @@ export class NewPostComponent implements OnInit {
   ) {
     // getting the router parameter for the edit option in the all component we need to get the id in the others section
     this.route.queryParams.subscribe(value => {
-      this.docId = value.id
-      console.log(this.docId)
-      if (this.docId) {
+      this.editParamId = value.id
+      if (this.editParamId) {
         // we are loading one data using the getting id from the route parameter we will get all the contents about the single post
         // This part is for the edited posts not for the new
-        this.postService.loadOneData(this.docId).subscribe((form) => {
+        this.postService.loadOneData(this.editParamId).subscribe((form) => {
           this.singlePost = form
           this.newForm = fb.group({
             title: [this.singlePost.title, [Validators.required, Validators.minLength(10)]],
@@ -49,7 +48,6 @@ export class NewPostComponent implements OnInit {
           })
           this.formStatus = 'Edit'
           this.imgSrc = this.singlePost.postImgPath
-          console.log(this.imgSrc)
           this.permalinkChange()
         })
 
@@ -73,7 +71,6 @@ export class NewPostComponent implements OnInit {
   ngOnInit(): void {
     this.categoryService.loadData().subscribe(value => {
       this.categories = value
-      console.log(this.categories);
       // first we will get all the data from the firebase store for the categories
     })
     // ng model in the form title and for the permalink
@@ -91,7 +88,7 @@ export class NewPostComponent implements OnInit {
     reader.readAsDataURL($event.target.files[0])
     // this selected image is for converting the file into a data url for the firebase
     this.selectedImage = $event.target.files[0]
-    console.log(this.selectedImage)
+
   }
   // this helped me to debug the code in the form i was not able to find which form is not validating using this method i get
   checking() {
@@ -102,7 +99,6 @@ export class NewPostComponent implements OnInit {
         invalid.push(name);
       }
     }
-    console.log(invalid)
     return invalid;
   }
 
@@ -125,9 +121,8 @@ export class NewPostComponent implements OnInit {
       status: 'New',
       createdAt: new Date()
     }
-    console.log(this.postData)
-    console.log(this.selectedImage)
-    this.postService.uploadImage(this.selectedImage, this.postData, this.formStatus, this.docId)
+
+    this.postService.uploadImage(this.selectedImage, this.postData, this.formStatus, this.editParamId)
 
   }
   //  change in the permalink text in the edit and the function also function

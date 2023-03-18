@@ -36,11 +36,10 @@
 
     <div class="flex items-center gap-10" *ngIf="isLoggedIn">
       <h1>{{ loggedUser }}</h1>
-      <button (click)="logOut()" class="p-4 bg-green-400 rounded-md">
-        LogOut
-      </button>
     </div>
-
+    <button (click)="logOut()" class="p-4 bg-green-400 rounded-md">
+      LogOut
+    </button>
     <button class="block lg:hidden" (click)="isTrue()">
       <span class="text-4xl material-symbols-outlined"> menu </span>
     </button>
